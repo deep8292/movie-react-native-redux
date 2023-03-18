@@ -11,11 +11,17 @@ import MovieGrid from "../components/movieGrid";
 const MovieList = () => {
     const dispatch = useDispatch();
     const movieState = useSelector((state) => state.movieList);
-    const { loading, items, error } = movieState;
+    const { loading, items, error, nextPage, isLoadingMore } = movieState;
 
     useEffect(() => {
         dispatch(fetchMovieList());
     }, [dispatch]);
+
+    const handleEndReached = () => {
+        if (!isLoadingMore || !loading) {
+            dispatch(fetchMovieList(true, nextPage.count));    
+        }
+    }
 
     return (
         <View style={style.containerStyles}>
@@ -24,7 +30,7 @@ const MovieList = () => {
                 ) : error ? (
                     <Text>Something went wrong</Text>
                 ) : (
-                    <MovieGrid movies={items}/>
+                    <MovieGrid movies={items} onEndReached={handleEndReached}/>
                 )
             }
         </View>

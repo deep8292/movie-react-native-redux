@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Image, StyleSheet } from 'react-native';
 
-const Movie = ({ movie }) => {
+const Movie = ({ movieId, movie }) => {
     return (
         <View style={styles.itemContainer}>
             {movie.primaryImage ? 
