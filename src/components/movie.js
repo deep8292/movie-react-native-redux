@@ -1,0 +1,38 @@
+import React from "react";
+import { View, Text, Image, StyleSheet } from 'react-native';
+
+const Movie = ({ movie }) => {
+    return (
+        <View style={styles.itemContainer}>
+            {movie.primaryImage ? 
+            <Image 
+                style={styles.imageStyles} 
+                source={ { uri: movie.primaryImage.url }}
+            />: 
+            <Image 
+                source={require('../../assets/placeholder_image.png')}
+            />
+            }
+            <Text style={styles.titleStyles}>{movie.titleText.text}</Text>
+        </View>
+    );
+}
+
+const styles = StyleSheet.create({
+    itemContainer: {
+        width: '50%',
+        paddingHorizontal: 2,
+        paddingVertical: 4,
+        alignItems:'center',
+    },
+    imageStyles: {
+        width: '100%',
+        aspectRatio: 1
+    },
+    titleStyles: {
+        fontWeight: '600',
+        fontSize: 15,
+    }
+});
+
+export default Movie;
