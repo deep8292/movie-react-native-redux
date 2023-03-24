@@ -3,13 +3,13 @@ import { API_END_POINTS } from "../config";
 import { listRecived, setError, startLoading, nextPage, startLoadingMore } from "../slice/moviesSlice";
 
 export const fetchMovieList = (isLoadingMore = false, page = 1) => async (dispatch) => {
-    console.log('page', page);
     isLoadingMore ? dispatch(startLoadingMore) : dispatch(startLoading());
     try {
         const response = await network.get(`${API_END_POINTS.titles}`, {
             params: {
                 limit: 20,
-                startYear: 2020,
+                year: 2020,
+                list: 'most_pop_movies',
                 page
             }
         });
@@ -26,4 +26,5 @@ export const fetchMovieList = (isLoadingMore = false, page = 1) => async (dispat
         dispatch(setError(error));
     }
 };
+
 
